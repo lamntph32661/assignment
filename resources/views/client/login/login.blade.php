@@ -53,7 +53,7 @@
                                             <div class="col-sm-6">
 
                                                 <div class="check-box d-inline-block ml-0 ml-md-2">
-                                                    <input type="checkbox" id="remember_me">
+                                                    <input type="checkbox" name="remember" id="remember_me">
                                                     <label for="remember_me">Remember me</label>
                                                 </div>
 

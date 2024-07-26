@@ -45,40 +45,38 @@
                                             <tr>
                                                 <th class="pro-thumbnail">Image</th>
                                                 <th class="pro-title">Product</th>
-                                                <th class="pro-price">Price</th>
-                                                <th class="pro-quantity">Quantity</th>
+                                                <th class="pro-price">Quantity</th>
+                                                <th class="pro-quantity">Price</th>
                                                 <th class="pro-subtotal">Total</th>
-                                                <th class="pro-remove">Remove</th>
+                                                
                                             </tr>
                                         </thead>
                                         <tbody>@php
                                             $total = 0;
                                         @endphp
-                                            @foreach ($carts as $item)
+                                            @foreach ($orders as $item)
                                                 <tr>
-                                                    <td class="pro-thumbnail"><a
-                                                            href="{{ route('Detail', $item->id) }}"><img width="600"
-                                                                height="800" src="{{ asset($item->image) }}"
-                                                                class="img-fluid" alt="Product"></a></td>
-                                                    <td class="pro-title"><a
-                                                            href="{{ route('Detail', $item->id) }}">{{ $item->name }}</a>
+                                                    <td class="pro-thumbnail">
+                                                        <a href="{{ route('Detail', $item->id) }}">
+                                                            <img width="600" height="800" src="{{ asset($item->image) }}" class="img-fluid" alt="Product"></a>
                                                     </td>
-                                                    <td class="pro-price"><span>${{ round($item->price*((100-$item->discount)/100),2) }}</span></td>
+                                                    <td class="pro-title">
+                                                        <a href="{{ route('Detail', $item->id) }}">{{ $item->name }}</a>
+                                                    </td>
+
                                                     <td class="pro-quantity">
-                                                        <div class="quantity-selection"><input type="number"
-                                                                value="{{ $item->quantity_cart }}" min="1"></div>
+                                                        {{ $item->quantity }}
+                                                    </td>
+                                                    <td class="pro-title">
+                                                        {{ $item->price }}
+                                                    </td>
+                                                    <td class="pro-title">
+                                                        {{ $item->total_price }}
                                                     </td>
                                                     <td class="pro-subtotal">
-                                                        <span>${{ round($item->price*((100-$item->discount)/100),2) * $item->quantity_cart }}</span>
-                                                    </td>
-                                                    <td class="pro-remove"><a
-                                                            href="{{ route('DeleteOneCart', $item->cart_id) }}"><i
-                                                                class="fa fa-trash-o"></i></a>
-                                                    </td>
+                                                        
+                                                    
                                                 </tr>
-                                                @php
-                                                    $total += $item->price * $item->quantity_cart;
-                                                @endphp
                                             @endforeach
 
 
@@ -91,7 +89,7 @@
 
                             </form>
 
-                            <div class="row">
+                            {{-- <div class="row">
 
                                 <div class="col-lg-6 col-12">
                                     <!--=======  Calculate Shipping  =======-->
@@ -147,7 +145,7 @@
 
                                 </div>
 
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <!--=======  End of page wrapper  =======-->

@@ -8,7 +8,7 @@
                     <div class="navigation-menu-wrapper">
                         <nav>
                             <ul>
-                                <li ><a href="{{route('home')}}">HOME</a>
+                                <li><a href="{{ route('home') }}">HOME</a>
                                     {{-- <ul class="sub-menu">
                                         <li><a href="index.html">Home Shop 1</a></li>
                                         <li><a href="index-2.html">Home Shop 2</a></li>
@@ -21,7 +21,7 @@
                                     </ul> --}}
                                 </li>
 
-                                <li ><a href="#">PAGES</a>
+                                <li><a href="#">PAGES</a>
                                     <ul class="sub-menu">
                                         <li class="menu-item-has-children"><a href="#">Page List One</a>
                                             <ul class="sub-menu">
@@ -47,7 +47,7 @@
                                     </ul>
                                 </li>
 
-                                <li class=""><a href="{{route('List')}}">SHOP</a>
+                                <li class=""><a href="{{ route('List') }}">SHOP</a>
                                     {{-- <ul class="mega-menu four-column">
                                         <li><a href="#">Shop Grid</a>
                                             <ul>
@@ -118,7 +118,8 @@
                     <!-- logo -->
                     <div class="logo text-center">
                         <a href="index-2.html">
-                            <img width="93" height="25" src="assets/img/logo.webp" class="img-fluid" alt="">
+                            <img width="93" height="25" src="assets/img/logo.webp" class="img-fluid"
+                                alt="">
                         </a>
                     </div>
 
@@ -132,7 +133,7 @@
                             </li>
                             <li>
                                 <div class="header-cart-icon">
-                                    <a href="{{route('ViewCart')}}" id="minicart-trigger">
+                                    <a href="{{ route('ViewCart') }}" id="minicart-trigger">
                                         <i class="ion-bag"></i>
                                         <span class="counter">3</span>
                                     </a>
@@ -144,7 +145,8 @@
                                                         class="ion-android-close"></i></a>
                                                 <div class="image">
                                                     <a href="single-product.html">
-                                                        <img width="80" height="106" src="assets/img/products/product-1-80x106.webp"
+                                                        <img width="80" height="106"
+                                                            src="assets/img/products/product-1-80x106.webp"
                                                             class="img-fluid" alt="">
                                                     </a>
                                                 </div>
@@ -159,7 +161,8 @@
                                                         class="ion-android-close"></i></a>
                                                 <div class="image">
                                                     <a href="single-product.html">
-                                                        <img width="80" height="106" src="assets/img/products/product-2-80x106.webp"
+                                                        <img width="80" height="106"
+                                                            src="assets/img/products/product-2-80x106.webp"
                                                             class="img-fluid" alt="">
                                                     </a>
                                                 </div>
@@ -174,7 +177,8 @@
                                                         class="ion-android-close"></i></a>
                                                 <div class="image">
                                                     <a href="single-product.html">
-                                                        <img width="80" height="106" src="assets/img/products/product-3-80x106.webp"
+                                                        <img width="80" height="106"
+                                                            src="assets/img/products/product-3-80x106.webp"
                                                             class="img-fluid" alt="">
                                                     </a>
                                                 </div>
@@ -208,7 +212,7 @@
                                             </table>
                                         </div>
                                         <div class="cart-buttons">
-                                            <a href="{{route('ViewCart')}}">VIEW CART</a>
+                                            <a href="{{ route('ViewCart') }}">VIEW CART</a>
                                             <a href="checkout.html">CHECKOUT</a>
                                         </div>
                                     </div>
@@ -230,20 +234,19 @@
                                         <div class="single-settings-block">
                                             <h4 class="title">MY ACCOUNT </h4>
                                             <ul>
-                                                @if (!empty(Session::get('user'))||(Session::get('user')))
-                                                <li><a href="login-register.html">{{Session::get('user')['name']}}</a></li>
-                                                @if (Session::get('user')['role']==0)
-                                                <li><a href="{{route('admin.home')}}">Login Admin</a></li>
-                                                
-                                                    
-                                                @endif
-                                                <li><a href="{{route('Logout')}}">Logout</a></li>
+                                                @if (Auth::user())
+
+                                                    <li><a href="#">{{ Auth::user()->name }}</a></li>
+                                                    <li><a href="{{ route('MyAccount') }}">Information</a></li>
+                                                    @if (Auth::user()->role == 0)
+                                                        <li><a href="{{ route('admin.home') }}">Login Admin</a></li>
+                                                    @endif
+                                                    <li><a href="{{ route('Logout') }}">Logout</a></li>
                                                 @else
-                                                    
-                                                                        <li><a href="{{route('Login')}}">Login</a></li>
+                                                    <li><a href="{{ route('Login') }}">Login</a></li>
                                                 @endif
-                                                                            
-                                                                        
+
+
                                             </ul>
                                         </div>
                                         <div class="single-settings-block">
@@ -256,11 +259,13 @@
                                         <div class="single-settings-block">
                                             <h4 class="title">LANGUAGE: EN-GB </h4>
                                             <ul>
-                                                <li><a href="javascript:void(0)"><img
-                                                            width="16" height="11" src="assets/img/icons/en-gb.webp" alt=""> English</a>
+                                                <li><a href="javascript:void(0)"><img width="16" height="11"
+                                                            src="assets/img/icons/en-gb.webp" alt="">
+                                                        English</a>
                                                 </li>
-                                                <li><a href="javascript:void(0)"><img
-                                                            width="16" height="11" src="assets/img/icons/de-de.webp" alt=""> Germany </a>
+                                                <li><a href="javascript:void(0)"><img width="16" height="11"
+                                                            src="assets/img/icons/de-de.webp" alt=""> Germany
+                                                    </a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -279,7 +284,8 @@
                         <div class="col-6 col-md-6">
                             <div class="header-logo">
                                 <a href="index.html">
-                                    <img width="93" height="25" src="assets/img/logo.webp" class="img-fluid" alt="">
+                                    <img width="93" height="25" src="assets/img/logo.webp" class="img-fluid"
+                                        alt="">
                                 </a>
                             </div>
                         </div>

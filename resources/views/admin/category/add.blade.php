@@ -12,10 +12,10 @@
           <div class="form-group">
             <label for="danhmuc">Tên danh mục</label>
             <input type="text" class="form-control" id="danhmuc" placeholder="Nhập tên danh mục" name="name">
-            {{$message['name']??''}}
+           <p style="color: red">{{$errors->first('name')??''}}</p> 
           </div>
           <div class="card-footer">
-            <input type="submit" class="btn btn-success" name="themmoi" value="Submit">
+            <input type="submit" class="btn btn-success" name="themmoi" onclick="return confirm('Xác nhận thêm')" value="Submit">
             <input class="btn btn-secondary" type="reset" value="Nhập lại">
             <a href="#" class="btn btn-success">Danh sách</a>
           </div>

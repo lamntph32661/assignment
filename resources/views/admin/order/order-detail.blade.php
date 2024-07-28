@@ -84,22 +84,19 @@
                             @if ($order->status == 'Cancelled')
                                 
                                <p>Cancelled</p> 
-                            @endif
-
-                        
+                            @endif 
                     </div>
-                    
-
                 </div>
-                <div class="card-footer">
-                    <input type="submit" class="btn btn-success" name="themmoi" value="Submit">
+                @if ($order->status != 'Delivered'||$order->status != 'Cancelled')       
+                           <div class="card-footer">
+                    <input type="submit" class="btn btn-success" name="themmoi"  onclick="return confirm('Xác nhận cập nhật')" value="Submit">
                     <input class="btn btn-secondary" type="reset" value="Nhập lại">
                     <a href="#" class="btn btn-primary">Danh sách</a>
-                </div>
+                </div>    
+                            @endif
+                
             </form>
-            <?php
-            
-            ?>
+
         </div>
     </nav>
 @endsection

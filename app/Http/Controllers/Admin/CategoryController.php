@@ -16,10 +16,10 @@ class CategoryController extends Controller
     {
         $message=[
             'name.required'=>'Bạn chưa nhập vào trường này',
-
+            'name.max'=>'Độ dài tối đa lầ 255 ký tự',
         ];
         $req->validate([
-            'name' => 'required:categories'
+            'name' => 'required|string|max:255'
         ],$message);
         $data = $req->all('name');
         Category::create($data);
@@ -32,9 +32,13 @@ class CategoryController extends Controller
         return view('admin/category/update',compact('category'));
     }
     public function updateCategoryPost($id, Request $req)  {
+        $message=[
+            'name.required'=>'Bạn chưa nhập vào trường này',
+            'name.max'=>'Độ dài tối đa lầ 255 ký tự',
+        ];
         $req->validate([
-            'name' => 'required:categories,name,'.$id
-        ]);
+            'name' => 'required|string|max:255'
+        ],$message);
         $data = $req->all('name');
         Category::where('id',$id)->update($data);
         return redirect()->route('admin.Category.listCategory')->with(['message' => 'Cập nhật thành công']);

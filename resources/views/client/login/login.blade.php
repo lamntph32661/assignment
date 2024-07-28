@@ -28,6 +28,9 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
+                @if (session('message'))
+                    <div class="alert alert-primary">{{session('message')}}</div>
+                @endif
                 <!--=======  page wrapper  =======-->
                 <div class="page-wrapper">
                     <div class="page-content-wrapper"><p style="margin: auto; font-size: 20px" >{{$message2??''}}</p>
@@ -43,12 +46,12 @@
 
                                         <div class="row">
                                             <div class="col-md-12 col-12">
-                                                <label>Email Address*</label>
-                                                <input type="email" name="email" placeholder="Email Address">
+                                                <label>Email Address*</label><p style="color: red">{{$errors->first('login_email')}}</p>
+                                                <input type="email" name="login_email" value="{{old('login_email')}}" placeholder="Email Address">
                                             </div>
                                             <div class="col-12">
-                                                <label>Password</label>
-                                                <input type="password" name="password" placeholder="Password">
+                                                <label>Password</label><p style="color: red">{{$errors->first('login_password')}}</p>
+                                                <input type="password" name="login_password" value="{{old('login_password')}}" placeholder="Password">
                                             </div>
                                             <div class="col-sm-6">
 
@@ -78,24 +81,24 @@
                                     <div class="login-form">
                                         @csrf
                                         <h4 class="login-title">Register</h4>
-                                        {{$message??''}}
+                                        {{-- {{$message??''}} --}}
                                         <div class="row">
                                             <div class="col-md-6 col-12 mb-20">
-                                                <label>Name</label>
-                                                <input type="text" name="name" placeholder="Name">
+                                                <label>Name</label><p style="color: red">{{$errors->first('name')}}</p>
+                                                <input type="text" name="name" value="{{old('name')}}" placeholder="Name">
                                             </div>
                                            
                                             <div class="col-md-12 mb-20">
-                                                <label>Email Address*</label>
-                                                <input type="email" name="email" placeholder="Email Address">
+                                                <label>Email Address*</label><p style="color: red">{{$errors->first('email')}}</p>
+                                                <input type="email" name="email" value="{{old('email')}}" placeholder="Email Address">
                                             </div>
                                             <div class="col-md-6 mb-20">
-                                                <label>Password</label>
-                                                <input type="password" name="password" placeholder="Password">
+                                                <label>Password</label><p style="color: red">{{$errors->first('password')}}</p>
+                                                <input type="password" name="password" value="{{old('password')}}" placeholder="Password">
                                             </div>
                                             <div class="col-md-6 mb-20">
-                                                <label>Confirm Password</label>
-                                                <input type="password" name="confirmpassword" placeholder="Confirm Password">
+                                                <label>Confirm Password</label><p style="color: red">{{$errors->first('confirmpassword')}}</p>
+                                                <input type="password" name="confirmpassword" value="{{old('confirmpassword')}}" placeholder="Confirm Password">
                                             </div>
                                             <div class="col-12">
                                                 <button class="register-button mt-0" type="submit">Register</button>

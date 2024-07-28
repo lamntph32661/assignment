@@ -43,26 +43,26 @@
 
                                             <div class="row">
 
-                                                <div class="col-md-6 col-md-12">
-                                                    <label>Name*</label>
-                                                    <input type="text" name="name_user" value="{{old('name_user')}}" placeholder="Name">
+                                                <div class="col-md-6 col-12">
+                                                    <label>Name*</label><p style="color: red">{{$errors->first('name')}}</p>
+                                                    <input type="text" name="name_user" value="{{Auth::user()->name}}" placeholder="Name">
                                                 </div>
 
                                                 
 
                                                 <div class="col-md-6 col-12">
-                                                    <label>Email Address*</label>
-                                                    <input type="email" value="{{old('email')}}" name="email" placeholder="Email Address">
+                                                    <label>Email Address*</label><p style="color: red">{{$errors->first('email')}}</p>
+                                                    <input type="email" value="{{old('email')??Auth::user()->email}}" name="email" placeholder="Email Address">
                                                 </div>
 
                                                 <div class="col-md-6 col-12">
-                                                    <label>Phone no*</label>
-                                                    <input type="text" value="{{old('phone')}}" name="phone" placeholder="Phone number">
+                                                    <label>Phone no*</label><p style="color: red">{{$errors->first('phone')}}</p>
+                                                    <input type="text" value="{{old('phone')??Auth::user()->phone}}" name="phone" placeholder="Phone number">
                                                 </div>
 
                                                 <div class="col-md-6 col-md-12">
-                                                    <label>Address*</label>
-                                                    <input type="text" value="{{old('address')}}" name="address" placeholder="Name">
+                                                    <label>Address*</label><p style="color: red">{{$errors->first('address')}}</p>
+                                                    <input type="text" value="{{old('address')??Auth::user()->address}}" name="address" placeholder="Name">
                                                 </div>
 
                                                 {{-- <div class="col-12">
@@ -228,18 +228,18 @@
                                                     
 
                                                     <div class="single-method">
-                                                        <input type="radio" id="payment_bank" name="payment-method"
-                                                            value="bank">
-                                                        <label for="payment_bank">Direct Bank Transfer</label>
+                                                        <input type="radio" id="vnpay" name="payment_method"
+                                                            value="vnpay">
+                                                        <label for="vnpay">VN Pay</label>
                                                         <p data-method="bank">Please send a Check to Store name with
                                                             Store Street, Store Town, Store State, Store Postcode, Store
                                                             Country.</p>
                                                     </div>
 
                                                     <div class="single-method">
-                                                        <input type="radio" id="payment_cash" name="payment-method"
-                                                            checked value="cash">
-                                                        <label for="payment_cash">Cash on Delivery</label>
+                                                        <input type="radio" id="cod" name="payment_method"
+                                                            checked value="cod">
+                                                        <label for="cod">Cash on Delivery</label>
                                                         <p data-method="cash">Please send a Check to Store name with
                                                             Store Street, Store Town, Store State, Store Postcode, Store
                                                             Country.</p>

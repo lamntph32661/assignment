@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class CheckRoleMiddleware
+class CheckLoginMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,11 +16,10 @@ class CheckRoleMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->role == 0) {
+        if (Auth::check()) {
             return $next($request);
-           
-        }else {
-            return redirect()->route('admin.login')->with(['message' => 'Yêu cầu đăng nhập']);
+        }else{
+            return redirect()->route('Login')->with(['message'=>'Vui lòng đăng nhập']);
         }
         
     }

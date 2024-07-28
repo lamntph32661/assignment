@@ -43,18 +43,18 @@
                                                 class="fa fa-dashboard"></i>
                                             Dashboard</a>
 
-                                        <a href="#orders" {{Session::get('active')??''}} data-bs-toggle="tab"><i class="fa fa-cart-arrow-down"></i>
+                                        <a href="#orders"  data-bs-toggle="tab"><i class="fa fa-cart-arrow-down"></i>
                                             Orders</a>
 
                                         
 
-                                        <a href="#orders_history" data-bs-toggle="tab"><i class="fa fa-cart-arrow-down"></i>
+                                        <a href="#orders_history"  data-bs-toggle="tab"><i class="fa fa-cart-arrow-down"></i>
                                             Orders History</a>
 
                                         <a href="#account-info"  data-bs-toggle="tab"><i class="fa fa-user"></i> Account
                                             Details</a>
 
-                                        <a href="login-register.html"><i class="fa fa-sign-out"></i> Logout</a>
+                                        
                                     </div>
                                 </div>
                                 <!-- My Account Tab Menu End -->
@@ -63,7 +63,7 @@
                                 <div class="col-lg-9 col-12">
                                     <div class="tab-content" id="myaccountContent">
                                         <!-- Single Tab Content Start -->
-                                        <div class="tab-pane fade  {{Session::get('show')??''}}" id="dashboad" role="tabpanel">
+                                        <div class="tab-pane fade  " id="dashboad" role="tabpanel">
                                             <div class="myaccount-content">
                                                 <h3>Dashboard</h3>
 
@@ -126,7 +126,7 @@
                                             </div>
                                         </div>
                                         <!-- Single Tab Content End -->
-                                        <div class="tab-pane fade {{Session::get('show')??''}}" id="orders_history" role="tabpanel">
+                                        <div class="tab-pane fade {{Session::get('show2')??''}}" id="orders_history" role="tabpanel">
                                             <div class="myaccount-content">
                                                 <h3>Orders History</h3>
 
@@ -181,7 +181,7 @@
                                         <!-- Single Tab Content End -->
 
                                         <!-- Single Tab Content Start -->
-                                        <div class="tab-pane fade  {{Session::get('show')??''}}" id="account-info" role="tabpanel">
+                                        <div class="tab-pane fade  {{Session::get('show3')??''}}" id="account-info" role="tabpanel">
                                             <div class="myaccount-content">
                                                 <h3>Account Details</h3>
                                                 {{ Session::get('message') }}

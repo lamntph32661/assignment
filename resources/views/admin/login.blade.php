@@ -6,7 +6,7 @@
       <div class="card-header">
         <h3 class="card-title">Thêm danh mục</h3>
       </div>
-      <form class="ml-5" action="{{route('admin.login')}}" method="POST">
+      <form class="ml-5" action="" method="POST">
         @csrf
       <div class="card-body">
           <div class="form-group">

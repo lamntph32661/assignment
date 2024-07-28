@@ -117,8 +117,8 @@
                     </div>
                     <!-- logo -->
                     <div class="logo text-center">
-                        <a href="index-2.html">
-                            <img width="93" height="25" src="assets/img/logo.webp" class="img-fluid"
+                        <a href="{{route('home')}}">
+                            <img width="93" height="25" src="{{asset('assets/img/logo.webp')}}" class="img-fluid"
                                 alt="">
                         </a>
                     </div>
@@ -133,14 +133,17 @@
                             </li>
                             <li>
                                 <div class="header-cart-icon">
-                                    <a href="{{ route('ViewCart') }}" id="minicart-trigger">
+                                    <a href="{{ route('ViewCart') }}" 
+                                    {{-- id="minicart-trigger" --}}
+                                    >
                                         <i class="ion-bag"></i>
-                                        <span class="counter">3</span>
+                                        {{-- <span class="counter">3</span> --}}
                                     </a>
                                     <!-- mini cart  -->
                                     <div class="mini-cart" id="mini-cart">
                                         <div class="cart-items-wrapper ps-scroll">
-                                            <div class="single-cart-item">
+                                            
+                                            {{-- <div class="single-cart-item">
                                                 <a href="javascript:void(0)" class="remove-icon"><i
                                                         class="ion-android-close"></i></a>
                                                 <div class="image">
@@ -155,8 +158,8 @@
                                                             dolore furniture</a></p>
                                                     <p class="count"><span>1 x </span> $402</p>
                                                 </div>
-                                            </div>
-                                            <div class="single-cart-item">
+                                            </div> --}}
+                                            {{-- <div class="single-cart-item">
                                                 <a href="javascript:void(0)" class="remove-icon"><i
                                                         class="ion-android-close"></i></a>
                                                 <div class="image">
@@ -187,7 +190,7 @@
                                                             dolore tool</a></p>
                                                     <p class="count"><span>1 x </span> $607</p>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                         <div class="cart-calculation">
                                             <table class="table">
@@ -249,26 +252,7 @@
 
                                             </ul>
                                         </div>
-                                        <div class="single-settings-block">
-                                            <h4 class="title">CURRENCY: USD </h4>
-                                            <ul>
-                                                <li><a href="javascript:void(0)">€ Euro</a></li>
-                                                <li><a href="javascript:void(0)">$ US Dollar</a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="single-settings-block">
-                                            <h4 class="title">LANGUAGE: EN-GB </h4>
-                                            <ul>
-                                                <li><a href="javascript:void(0)"><img width="16" height="11"
-                                                            src="assets/img/icons/en-gb.webp" alt="">
-                                                        English</a>
-                                                </li>
-                                                <li><a href="javascript:void(0)"><img width="16" height="11"
-                                                            src="assets/img/icons/de-de.webp" alt=""> Germany
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </li>
@@ -283,8 +267,8 @@
                     <div class="row align-items-center">
                         <div class="col-6 col-md-6">
                             <div class="header-logo">
-                                <a href="index.html">
-                                    <img width="93" height="25" src="assets/img/logo.webp" class="img-fluid"
+                                <a href="{{route('home')}}">
+                                    <img width="93" height="25" src="{{asset('assets/img/logo.webp')}}" class="img-fluid"
                                         alt="">
                                 </a>
                             </div>

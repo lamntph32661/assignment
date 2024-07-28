@@ -38,7 +38,7 @@
                 <a href="{{route('admin.Category.listCategory')}}" class="nav-link">
                   <i class="nav-icon far fa-image"></i>
                   <p>
-                    Genre
+                    Category
                   </p>
                 </a>
               </li>
@@ -63,6 +63,14 @@
                   <i class="nav-icon far fa-image"></i>
                   <p>
                     User
+                  </p>
+                </a>  
+              </li>
+              <li class="nav-item">
+                <a href="{{route('admin.comment.list')}}" class="nav-link">
+                  <i class="nav-icon far fa-image"></i>
+                  <p>
+                    Comment
                   </p>
                 </a>  
               </li>

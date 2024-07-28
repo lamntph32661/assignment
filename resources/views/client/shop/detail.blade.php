@@ -21,18 +21,18 @@
             </div>
         </div>
     </div>
-    
-    
+
+
     <!--====================  End of breadcrumb area  ====================-->
     <!--====================  page content area ====================-->
     <div class="page-content-area">
         <div class="container">
             <div class="row">
                 @if (Session::get('message'))
-       <div class="alert alert-success" role="alert">
-        
-      {{Session::get('message')??''}}</div> 
-    @endif
+                    <div class="alert alert-success" role="alert">
+
+                        {{ Session::get('message') ?? '' }}</div>
+                @endif
                 <div class="col-lg-12">
                     <!--=======  page wrapper  =======-->
                     <div class="page-wrapper">
@@ -165,7 +165,8 @@
 
                                             <p class="single-grid-product__price"><span
                                                     class="discounted-price">${{ $product->price * ((100 - $product->discount) / 100) }}</span>
-                                                <span class="main-price discounted">${{ $product->price }}</span></p>
+                                                <span class="main-price discounted">${{ $product->price }}</span>
+                                            </p>
 
                                             <p class="single-info">Product Code: <span
                                                     class="value">{{ $product->id }}</span> </p>
@@ -185,13 +186,14 @@
                                             <form action="{{ route('addToCart') }}" method="post">
                                                 @csrf
                                                 <input type="hidden" name="product_id" value="{{ $product->id }}">
-                                                
-                                                
+
+
 
                                                 <div class="product-actions">
                                                     <div class="quantity-selection">
                                                         <label>Qty</label>
-                                                        <input type="number"  name="quantity" value="1" min="1">
+                                                        <input type="number" name="quantity" value="1"
+                                                            min="1">
                                                     </div>
 
                                                     <div class="product-buttons">
@@ -276,7 +278,7 @@
                                                             <h4>4.5 <span>(Overall)</span></h4>
                                                             <span>Based on 9 Comments</span>
                                                         </div>
-                                                        <div class="rating-list">
+                                                        {{-- <div class="rating-list">
                                                             <div class="sin-list float-start">
                                                                 <i class="fa fa-star"></i>
                                                                 <i class="fa fa-star"></i>
@@ -317,29 +319,27 @@
                                                                 <i class="fa fa-star-o"></i>
                                                                 <span>(0)</span>
                                                             </div>
-                                                        </div>
+                                                        </div> --}}
                                                         <div class="ratings-wrapper">
-
-                                                            <div class="sin-ratings">
+@foreach ($comments as $item)
+    <div class="sin-ratings">
                                                                 <div class="rating-author">
-                                                                    <h3>Cristopher Lee</h3>
+                                                                    <h3>{{$item->name}}</h3>
                                                                     <div class="rating-star">
-                                                                        <i class="fa fa-star"></i>
-                                                                        <i class="fa fa-star"></i>
-                                                                        <i class="fa fa-star"></i>
-                                                                        <i class="fa fa-star"></i>
-                                                                        <i class="fa fa-star"></i>
-                                                                        <span>(5)</span>
+                                                                        @for ($i = 0; $i < $item->rating; $i++)
+                                                                             <i class="fa fa-star"></i>
+                                                                        
+                                                                        @endfor
+                                                                       
+                                                                        <span>({{$item->rating}})</span>
                                                                     </div>
                                                                 </div>
-                                                                <p>enim ipsam voluptatem quia voluptas sit
-                                                                    aspernatur aut odit aut fugit, sed quia res eos
-                                                                    qui ratione voluptatem sequi Neque porro
-                                                                    quisquam est, qui dolorem ipsum quia dolor sit
-                                                                    amet, consectetur, adipisci veli</p>
+                                                                <p>{{$item->content}}</p>
                                                             </div>
+@endforeach
+                                                            
 
-                                                            <div class="sin-ratings">
+                                                            {{-- <div class="sin-ratings">
                                                                 <div class="rating-author">
                                                                     <h3>Rashed Mahmud</h3>
                                                                     <div class="rating-star">
@@ -375,36 +375,61 @@
                                                                     qui ratione voluptatem sequi Neque porro
                                                                     quisquam est, qui dolorem ipsum quia dolor sit
                                                                     amet, consectetur, adipisci veli</p>
-                                                            </div>
+                                                            </div> --}}
 
                                                         </div>
                                                         <div class="rating-form-wrapper fix">
                                                             <h3>Add your Comments</h3>
-                                                            <form action="#">
+                                                            <form
+                                                                action="
+                                                                {{ route('Comment', ['product' => $product->id]) }}
+                                                                 " method="POST">
+                                                                 @csrf
                                                                 <div class="rating-form row">
                                                                     <div class="col-12 mb-15">
+                                                                        @if (Auth::user())
+                                                                            <input type="hidden" name="user_id" value="{{Auth::user()->id??''}}">
+                                                                        @endif
+                                                                        
+                                                                        <input type="hidden" name="product_id" value="{{$product->id}}">
                                                                         <h5>Rating:</h5>
-                                                                        <div class="rating-star fix">
-                                                                            <i class="fa fa-star-o"></i>
-                                                                            <i class="fa fa-star-o"></i>
-                                                                            <i class="fa fa-star-o"></i>
-                                                                            <i class="fa fa-star-o"></i>
-                                                                            <i class="fa fa-star-o"></i>
-                                                                        </div>
+                                                                        <select name="rating" id="">
+                                                                            <option value="1">
+                                                                               
+                                                                                1
+                                                                            </option>
+                                                                            <option value="2">
+                                                                                
+                                                                                2
+                                                                            </option>
+                                                                            <option value="3">
+                                                                                
+                                                                                3
+                                                                            </option>
+                                                                            <option value="4">
+                                                                                4
+                                                                                
+                                                                            </option>
+                                                                            <option value="5" >5
+                                                                            </option>
+                                                                        </select>
+                                                                        
+
+                                                                        
                                                                     </div>
                                                                     <div class="col-md-6 col-12 form-group">
                                                                         <label for="name">Name:</label>
-                                                                        <input id="name" placeholder="Name"
+                                                                        <input id="name" placeholder="Name" disabled name="name" value="{{Auth::user()->name??''}}"
                                                                             type="text">
                                                                     </div>
                                                                     <div class="col-md-6 col-12 form-group">
                                                                         <label for="email">Email:</label>
-                                                                        <input id="email" placeholder="Email"
+                                                                        <input id="email" placeholder="Email" disabled name="email" value="{{Auth::user()->email??''}}"
                                                                             type="text">
                                                                     </div>
                                                                     <div class="col-12 form-group">
                                                                         <label for="your-review">Your Review:</label>
-                                                                        <textarea name="review" id="your-review" placeholder="Write a review"></textarea>
+                                                                        <textarea  id="your-review" name="content" placeholder="Write a review"></textarea>
                                                                     </div>
                                                                     <div class="col-12">
                                                                         <input value="add review" type="submit">

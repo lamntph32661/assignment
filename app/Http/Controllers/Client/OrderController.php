@@ -19,11 +19,11 @@ class OrderController extends Controller
     
     public function cancelledOrder($id){
         Order::where('id',$id)->update(['status'=>'Cancelled']);
-        return redirect()->back()->with(['message'=>'Đã hủy','active'=>'class="active"','show'=>'show active']);
+        return redirect()->back()->with(['message'=>'Đã hủy','active2'=>'class="active"','show2'=>'show active']);
     }
     public function receivedOrder($id)  {
-        Order::where('id',$id)->update(['status'=>'Cancelled']);
-        return redirect()->back()->with(['message'=>'Đã xác nhận','active'=>'class="active"','show'=>'show active']);
+        Order::where('id',$id)->update(['status'=>'Received']);
+        return redirect()->back()->with(['message'=>'Đã nhận','active'=>'class="active"','show2'=>'show active']);
     }
     
 }

@@ -27,6 +27,10 @@
     <div class="page-content-area">
         <div class="container">
             <div class="row">
+                @if (session('message'))
+                    <div class="alert alert-success">{{session('message')}}</div>
+                @endif
+                
                 <div class="col-lg-12">
                     <!--=======  shop page wrapper  =======-->
                     <div class="page-wrapper">
@@ -104,7 +108,8 @@
                                                     </ul>
                                                 </li> --}}
                                                 @foreach ($categories as $item)
-                                                    <li><a href="#">{{$item->name}}<span class="counter">7</span></a></li>
+
+                                                    <li><a href="{{route('List',['cate'=>$item->id])}}">{{$item->name}}<span class="counter">{{$item->product_count}}</span></a></li>
                                                 @endforeach
                                                 
                                                 
@@ -201,13 +206,19 @@
                                                             </a>
         
                                                             <div class="hover-icons">
-                                                                <a href="javascript:void(0)"><i class="ion-bag"></i></a>
-                                                                <a href="javascript:void(0)"><i class="ion-heart"></i></a>
-                                                                <a href="javascript:void(0)"><i
+                                                                <form action="{{ route('addToCart') }}" method="post">
+                                                                    @csrf
+                                                                    <input type="hidden" name="product_id" value="{{ $item->id }}">
+                                                                    <input type="hidden" name="quantity" value="1">
+                                                                     <a href="javascript:void(0)"><button type="submit" class="btn btn-submit"><i class="ion-bag"></button></i></a>
+                                                                <a href="javascript:void(0)" class="btn btn-submit"><i class="ion-heart"></i></a>
+                                                                <a href="javascript:void(0)" class="btn btn-submit"><i
                                                                         class="ion-android-options"></i></a>
-                                                                <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                                <a href="javascript:void(0)" class="btn btn-submit" data-bs-toggle="modal"
                                                                     data-bs-target="#quick-view-modal-container"><i
                                                                         class="ion-android-open"></i></a>
+                                                                </form>
+                                                               
                                                             </div>
                                                         </div>
                                                         <div class="single-grid-product__content">

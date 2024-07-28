@@ -63,13 +63,26 @@
                                                     <td class="pro-title"><a
                                                             href="{{ route('Detail', $item->id) }}">{{ $item->name }}</a>
                                                     </td>
-                                                    <td class="pro-price"><span>${{ round($item->price*((100-$item->discount)/100),2) }}</span></td>
+                                                    <td class="pro-price">
+                                                        <span>${{ round($item->price * ((100 - $item->discount) / 100), 2) }}</span>
+                                                    </td>
                                                     <td class="pro-quantity">
-                                                        <div class="quantity-selection"><input type="number"
-                                                                value="{{ $item->quantity_cart }}" min="1"></div>
+                                                        <div class="quantity-selection">
+                                                            {{-- <form action="{{ route('updateToCart') }}" method="post">
+                                                                @csrf
+                                                                <input type="hidden" name="product_id"
+                                                                    value="{{ $item->id }}">
+                                                                <input type="number" name="quantity"
+                                                                    value="{{ $item->quantity_cart }}">
+                                                                {{ $errors->first('quantity') }}
+                                                                <button type="submit">Thay đổi</button></a>
+                                                            </form> --}}
+                                                            <input type="default" name="quantity"
+                                                                    value="{{ $item->quantity_cart }}">
+                                                        </div>
                                                     </td>
                                                     <td class="pro-subtotal">
-                                                        <span>${{ round($item->price*((100-$item->discount)/100),2) * $item->quantity_cart }}</span>
+                                                        <span>${{ round($item->price * ((100 - $item->discount) / 100), 2) * $item->quantity_cart }}</span>
                                                     </td>
                                                     <td class="pro-remove"><a
                                                             href="{{ route('DeleteOneCart', $item->cart_id) }}"><i
@@ -136,7 +149,7 @@
                                             <a href="{{ route('DeleteAllCart') }}"class="update-btn" style="margin: au">
                                                 <button class="update-btn">Delete All</button>
                                             </a>
-                                            <a href="{{ route('Checkout') }}" class="checkout-btn"> 
+                                            <a href="{{ route('Checkout') }}" class="checkout-btn">
                                                 <button class="checkout-btn">Checkout</button>
                                             </a>
 

@@ -244,8 +244,8 @@
         <!--=======  search form  =======-->
 
         <div class="search-form">
-            <form action="#">
-                <input type="search" placeholder="Search entire store here ...">
+            <form action="{{route('List')}}" method="get">
+                <input type="search" name="product_name" placeholder="Search entire store here ...">
                 <button type="submit"><i class="ion-android-search"></i></button>
             </form>
         </div>

@@ -8,7 +8,7 @@
         @endif
         <div class="card card-primary">
           <div class="card-header">
-            <h3 class="card-title">Danh sách sản phẩm</h3>
+            <h3 class="card-title">Danh sách đơn hàng</h3>
             <div class="card-tools">
             {{-- <form action="" method="post" style="display: flex;">
                   <input type="text" name="kyw" id="" class="form-control float-right" placeholder="Search" style=" margin-right: 10px;">

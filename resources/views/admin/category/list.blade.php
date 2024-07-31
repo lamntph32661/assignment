@@ -8,16 +8,16 @@
                 @endif
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Danh sách sản phẩm</h3>
+                        <h3 class="card-title">Danh sách danh mục</h3>
                         <div class="card-tools">
-                            <form action="" method="post" style="display: flex;">
+                            {{-- <form action="" method="post" style="display: flex;">
                                 <input type="text" name="kyw" id="" class="form-control float-right"
                                     placeholder="Search" style=" margin-right: 10px;">
                                 <select name="iddm" id="" class="form-control" style=" margin-right: 10px;">
                                     <option value="0" selected>Tất cả</option>
                                 </select>
                                 <input type="submit" name="listok" value="Search" class="btn btn-default">
-                            </form>
+                            </form> --}}
                         </div>
                     </div>
                     <!-- /.card-header -->

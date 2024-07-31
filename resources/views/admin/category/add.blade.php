@@ -17,7 +17,7 @@
           <div class="card-footer">
             <input type="submit" class="btn btn-success" name="themmoi" onclick="return confirm('Xác nhận thêm')" value="Submit">
             <input class="btn btn-secondary" type="reset" value="Nhập lại">
-            <a href="#" class="btn btn-success">Danh sách</a>
+            <a href="{{route('admin.category.listCategory')}}" class="btn btn-success">Danh sách</a>
           </div>
       </form>
       <?php

@@ -5,7 +5,7 @@
       <div class="col-12">
        
         {{-- {{Auth::user()->role}} --}}
-        {{Auth::check()}}
+        Hello {{Auth::user()->name}}
       </div>
       
     </div>

@@ -59,7 +59,7 @@
                       
                   @endif</td>
                   <td>{{$item->quantity}}</td>
-                  <td>{{$item->category_id}}</td>
+                  <td>{{$item->cate_name}}</td>
                   <td><a href="{{route('admin.Product.updateProduct',$item->id)}}"><button class="btn btn-primary"> Chỉnh sửa</button></a> <a href="{{route('admin.Product.deleteProduct',$item->id)}}" onclick="return confirm('Bạn có muốn xóa')"><button class="btn btn-danger">Xóa</button></a></td>
                 </tr>
                 @endforeach

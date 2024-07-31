@@ -61,8 +61,10 @@ Route::post('forgot-password', [UserController::class, 'checkForGot'])->name('Fo
 Route::get('reset-password/{token}', [UserController::class, 'reset_password'])->name('ResetPassword');
 Route::post('reset-password/{token}', [UserController::class, 'change_password'])->name('ResetPasswords');
 
-
+Route::get('sign-up', [UserController::class, 'Signup'])->name('Signup');
 Route::post('sign-up', [UserController::class, 'checkUserSignup'])->name('Signup');
+
+Route::get('active-account', [UserController::class, 'Active'])->name('Active');
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.','middleware'=>'checkRole'], function () {
     Route::get('login', [HomeController::class, 'login'])->name('login');

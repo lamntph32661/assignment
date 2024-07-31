@@ -56,12 +56,12 @@
                                                     class="list-view"></button> --}}
                                             </div>
 
-                                            <div class="shop-header__left__message">
+                                            {{-- <div class="shop-header__left__message">
                                                 Showing 1 to 9 of 15 (2 Pages)
-                                            </div>
+                                            </div> --}}
                                         </div>
 
-                                        <div class="shop-header__right">
+                                        {{-- <div class="shop-header__right">
 
                                             <div class="single-select-block d-inline-block">
                                                 <span class="select-title">Show:</span>
@@ -82,7 +82,7 @@
                                                     <option value="4">Color</option>
                                                 </select>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <!--=======  End of shop page header  =======-->
                                 </div>
@@ -118,7 +118,7 @@
                                         </div>
                                         <!--=======  End of single sidebar widget  =======-->
                                         <!--=======  single sidebar widget  =======-->
-                                        <div class="single-sidebar-widget">
+                                        {{-- <div class="single-sidebar-widget">
                                             <div class="sidebar-sub-widget-wrapper">
                                                 <div class="sidebar-sub-widget">
                                                     <h4
@@ -177,7 +177,7 @@
                                                 <li><a href="#">Chair</a></li>
 
                                             </ul>
-                                        </div>
+                                        </div> --}}
                                         <!--=======  End of single sidebar widget  =======-->
                                     </div>
                                     <!--=======  End of page sidebar wrapper  =======-->
@@ -235,7 +235,13 @@
                                                             </div>
         
                                                             <h3 class="single-grid-product__title"> <a
-                                                                    href="single-product.html">{{ $item->name }}</a></h3>
+                                                                    href="single-product.html">@if (strlen($item->name)>30)
+                                                                    {{substr($item->name,0,50).'...'}}
+                                                                   
+                                                                    @else
+                                                                        {{$item->name}}
+                                                                    
+                                                                @endif</a></h3>
                                                             <p class="single-grid-product__price"><span
                                                                     class="discounted-price">${{ round($item->price*((100-$item->discount)/100),2) }}</span> <span
                                                                     class="main-price discounted">${{ $item->price }}</span></p>

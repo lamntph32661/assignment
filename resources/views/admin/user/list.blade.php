@@ -64,7 +64,7 @@
         </div>
         <!-- /.card -->
       </div>
-      <a href="{{route('admin.user.addUser')}}"><input class="btn btn-primary" type="button" value="Thêm mới" style="margin-left: 6px;"></a>
+      {{-- <a href="{{route('admin.user.addUser')}}"><input class="btn btn-primary" type="button" value="Thêm mới" style="margin-left: 6px;"></a> --}}
     </div>
     <!-- /.row -->
 </nav>

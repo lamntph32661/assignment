@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Product\AddProductRequest;
+use App\Http\Requests\Product\UpdateProductRequest;
 use App\Models\Category;
 use App\Models\Product;
 
@@ -13,7 +15,7 @@ class ProductController extends Controller
 {
     public function list()
     {
-        $products = Product::orderBy('id', 'DESC')->get();
+        $products = Product::join('categories','categories.id','=','products.category_id')->select('products.*','categories.name as cate_name')->orderBy('products.id', 'DESC')->get();
         return view('admin/product/list', compact('products'));
     }
     public function add()
@@ -21,27 +23,9 @@ class ProductController extends Controller
         $categories = Category::orderBy('id', 'DESC')->get();
         return view('admin/product/add', compact('categories'));
     }
-    public function addPro(Request $req)
+    public function addPro(AddProductRequest $req)
     {
-        $req->validate([
-            'name' => 'required|string|max:255',
-            'price' => 'required|numeric|min:0|max:99999999',
-            'discount' => 'required|numeric|min:0|max:100',
-            'quantity' => 'required|integer|min:1',
-            'description' => 'required|string|max:500',
-        ],[
-            'name.required'=>'Vui lòng điền vào trường này',
-            'price.required'=>'Vui lòng điền vào trường này',
-            'quantity.required'=>'Vui lòng điền vào trường này',
-            'description.required'=>'Vui lòng điền vào trường này',
-            'name.max'=>'Độ dài tối đa là 255 ký tự',
-            'description.max'=>'Độ dài tối đa là 1000 ký tự',
-            'discount.max'=>'Giảm giá tối đa là 100%',
-            'discount.min'=>'Tối thiểu là 0',
-            'quantity.min'=>'Tối thiểu là 1',
-            'price.min'=>'Tối thiểu là 0',
-            'price.max'=>'Tối đa là 8 chữ số',
-        ]);
+        
         $imageUrl = '';
         if ($req->hasFile('image')) {
             $image = $req->file('image');
@@ -72,27 +56,27 @@ class ProductController extends Controller
         $product = Product::find($id);
         return view('admin/product/update', compact('product', 'categories'));
     }
-    function updateProductPost($id, Request $req)
+    function updateProductPost($id, UpdateProductRequest $req)
     {
-        $req->validate([
-            'name' => 'required|string|max:255',
-            'price' => 'required|numeric|min:0|max:99999999',
-            'discount' => 'required|numeric|min:0|max:100',
-            'quantity' => 'required|integer|min:1',
-            'description' => 'required|string|max:500',
-        ],[
-            'name.required'=>'Vui lòng điền vào trường này',
-            'price.required'=>'Vui lòng điền vào trường này',
-            'quantity.required'=>'Vui lòng điền vào trường này',
-            'description.required'=>'Vui lòng điền vào trường này',
-            'name.max'=>'Độ dài tối đa là 255 ký tự',
-            'description.max'=>'Độ dài tối đa là 1000 ký tự',
-            'discount.max'=>'Giảm giá tối đa là 100%',
-            'discount.min'=>'Tối thiểu là 0',
-            'quantity.min'=>'Tối thiểu là 1',
-            'price.min'=>'Tối thiểu là 0',
-            'price.max'=>'Tối đa là 8 chữ số',
-        ]);
+        // $req->validate([
+        //     'name' => 'required|string|max:255',
+        //     'price' => 'required|numeric|min:0|max:99999999',
+        //     'discount' => 'required|numeric|min:0|max:100',
+        //     'quantity' => 'required|integer|min:1',
+        //     'description' => 'required|string|max:500',
+        // ],[
+        //     'name.required'=>'Vui lòng điền vào trường này',
+        //     'price.required'=>'Vui lòng điền vào trường này',
+        //     'quantity.required'=>'Vui lòng điền vào trường này',
+        //     'description.required'=>'Vui lòng điền vào trường này',
+        //     'name.max'=>'Độ dài tối đa là 255 ký tự',
+        //     'description.max'=>'Độ dài tối đa là 1000 ký tự',
+        //     'discount.max'=>'Giảm giá tối đa là 100%',
+        //     'discount.min'=>'Tối thiểu là 0',
+        //     'quantity.min'=>'Tối thiểu là 1',
+        //     'price.min'=>'Tối thiểu là 0',
+        //     'price.max'=>'Tối đa là 8 chữ số',
+        // ]);
         $data = $req->all('name', 'price', 'discount', 'quantity', 'description', 'category_id');
 
         if ($req->hasFile('image')) {

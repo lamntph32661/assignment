@@ -43,19 +43,14 @@
                                         <div class="row">
                                             <div class="col-md-6 mb-20">
                                                 <label>Password</label>
-                                                <input type="password" name="password" placeholder="Password">
+                                                <input type="password" name="password" value="{{old('password')}}" placeholder="Password"><p style="color: red">{{$errors->first('password')}}</p>
                                             </div>
                                             <div class="col-md-6 mb-20">
                                                 <label>Confirm Password</label>
-                                                <input type="password" name="confirmpassword" placeholder="Confirm Password">
+                                                <input type="password" name="confirmpassword" value="{{old('confirmpassword')}}" placeholder="Confirm Password"><p style="color: red">{{$errors->first('confirmpassword')}}</p>
                                             </div>
-                                            
-                                            
-
-                                            
-
                                             <div class="col-md-12">
-                                                <button class="register-button" type="submit">Send email</button>
+                                                <button class="register-button" type="submit">Submit</button>
                                             </div>
 
                                         </div>

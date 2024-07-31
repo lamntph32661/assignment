@@ -73,7 +73,7 @@
                                                             src="{{ asset($product->image) }}" class="img-fluid"
                                                             alt="">
                                                     </div>
-                                                    <div class="single-image">
+                                                    {{-- <div class="single-image">
                                                         <img width="600" height="800"
                                                             src="assets/img/products/big1-2.webp" class="img-fluid"
                                                             alt="">
@@ -91,7 +91,7 @@
                                                         <img width="600" height="800"
                                                             src="assets/img/products/big1-5.webp" class="img-fluid"
                                                             alt="">
-                                                    </div>
+                                                    </div> --}}
                                                 </div>
                                             </div>
 
@@ -122,7 +122,7 @@
                                                     <img style="width: 100px; height: 100px; object-fit:cover"
                                                         src="{{ asset($product->image) }}" class="img-fluid" alt="">
                                                 </div>
-                                                <div class="single-image">
+                                                {{-- <div class="single-image">
                                                     <img width="600" height="800" src="assets/img/products/big1-2.webp"
                                                         class="img-fluid" alt="">
                                                 </div>
@@ -137,7 +137,7 @@
                                                 <div class="single-image">
                                                     <img width="600" height="800" src="assets/img/products/big1-5.webp"
                                                         class="img-fluid" alt="">
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
 
@@ -150,7 +150,7 @@
                                                     href="shop-left-sidebar.html">{{ $product->category_name }}</a>
                                             </p>
                                             <h4 class="product-title">{{ $product->name }}</h4>
-                                            <div class="product-rating">
+                                            {{-- <div class="product-rating">
                                                 <span class="rating">
                                                     <i class="ion-android-star active"></i>
                                                     <i class="ion-android-star active"></i>
@@ -161,7 +161,7 @@
 
                                                 <span class="review-count"> <a href="#">(2 reviews)</a> | <a
                                                         href="#">Write A Review</a> </span>
-                                            </div>
+                                            </div> --}}
 
                                             <p class="single-grid-product__price"><span
                                                     class="discounted-price">${{ $product->price * ((100 - $product->discount) / 100) }}</span>
@@ -182,7 +182,7 @@
 
 
 
-                                            <div class="product-countdown" data-countdown="2023/06/01"></div>
+                                            {{-- <div class="product-countdown" data-countdown="2024/09/01"></div> --}}
                                             <form action="{{ route('addToCart') }}" method="post">
                                                 @csrf
                                                 <input type="hidden" name="product_id" value="{{ $product->id }}">
@@ -204,15 +204,15 @@
                                                                 CART</button> </a>
 
 
-                                                        <span class="wishlist-compare-btn">
+                                                        {{-- <span class="wishlist-compare-btn">
                                                             <a> <i class="ion-heart"></i></a>
                                                             <a> <i class="ion-android-options"></i></a>
-                                                        </span>
+                                                        </span> --}}    
                                                     </div>
 
                                                 </div>
                                             </form>
-                                            <div class="social-share-buttons mt-20">
+                                            {{-- <div class="social-share-buttons mt-20">
                                                 <h5>share this product</h5>
                                                 <ul>
                                                     <li><a class="twitter" href="#"><i
@@ -229,7 +229,7 @@
                                             </div>
                                             <p class="single-info mb-0">Tags: <a href="shop-left-sidebar.html">Dolor</a>
                                                 , <a href="shop-left-sidebar.html">Ipsum</a>, <a
-                                                    href="shop-left-sidebar.html">Lorem</a> </p>
+                                                    href="shop-left-sidebar.html">Lorem</a> </p> --}}
 
 
                                         </div>
@@ -254,8 +254,7 @@
                                                         data-bs-toggle="tab" href="#product-description" role="tab"
                                                         aria-selected="true">Description</a>
                                                     <a class="nav-item nav-link" id="review-tab" data-bs-toggle="tab"
-                                                        href="#review" role="tab" aria-selected="false">Reviews
-                                                        (1)</a>
+                                                        href="#review" role="tab" aria-selected="false">Review(s)</a>
                                                 </div>
                                             </nav>
                                             <div class="tab-content" id="nav-tabContent">
@@ -275,8 +274,8 @@
 
                                                     <div class="product-rating-wrap">
                                                         <div class="pro-avg-rating">
-                                                            <h4>4.5 <span>(Overall)</span></h4>
-                                                            <span>Based on 9 Comments</span>
+                                                            {{-- <h4>4.5 <span>(Overall)</span></h4>
+                                                            <span>Based on 9 Comments</span> --}}
                                                         </div>
                                                         {{-- <div class="rating-list">
                                                             <div class="sin-list float-start">
@@ -489,58 +488,72 @@
                     {"breakpoint":479, "settings": {"slidesToShow": 1, "arrows": false} }
                 ]'>
                                                 @foreach ($productOther as $item)
-                                                    <div class="col">
-                                                        <div class="single-grid-product">
-                                                            <div class="single-grid-product__image">
-                                                                <div class="single-grid-product__label">
-                                                                    <span class="sale">-{{ $item->discount }}%</span>
-                                                                    <span class="new">New</span>
-                                                                </div>
-                                                                <a href="{{ route('Detail', $item->id) }}">
-                                                                    <img style="width: 300px; height: 400px; object-fit:cover"
-                                                                        src="{{ asset($item->image) }}" class="img-fluid"
-                                                                        alt="" style="object-fit: cover">
-                                                                    <img style="width: 300px; height: 400px; object-fit:cover"
-                                                                        src="{{ asset($item->image) }}" class="img-fluid"
-                                                                        alt="">
-                                                                </a>
-
-                                                                <div class="hover-icons">
-                                                                    <a href="javascript:void(0)"><i
-                                                                            class="ion-bag"></i></a>
-                                                                    <a href="javascript:void(0)"><i
+                                                <div class="col">
+                                                    <div class="single-grid-product">
+                                                        <div class="single-grid-product__image">
+                                                            <div class="single-grid-product__label">
+                                                                <span class="sale">-{{ $item->discount }}%</span>
+                                                                <span class="new">New</span>
+                                                            </div>
+                                                            <a href="{{ route('Detail', $item->id) }}">
+                                                                <img style="width: 300px; height: 400px; object-fit:cover"
+                                                                    src="{{ asset($item->image) }}" class="img-fluid"
+                                                                    alt="" style="object-fit: cover">
+                                                                <img style="width: 300px; height: 400px; object-fit:cover"
+                                                                    src="{{ asset($item->image) }}" class="img-fluid"
+                                                                    alt="">
+                                                            </a>
+    
+                                                            <div class="hover-icons">
+                                                                <form action="{{ route('addToCart') }}" method="post">
+                                                                    @csrf
+                                                                    <input type="hidden" name="product_id"
+                                                                        value="{{ $item->id }}">
+                                                                    <input type="hidden" name="quantity" value="1">
+                                                                    <a href="javascript:void(0)"><button type="submit"
+                                                                            class="btn btn-submit"
+                                                                            onclick="return alert('Thêm thành công')"><i
+                                                                                class="ion-bag"></button></i></a>
+                                                                    <a href="javascript:void(0)" class="btn btn-submit"><i
                                                                             class="ion-heart"></i></a>
-                                                                    <a href="javascript:void(0)"><i
+                                                                    <a href="javascript:void(0)" class="btn btn-submit"><i
                                                                             class="ion-android-options"></i></a>
-                                                                    <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                                    <a href="javascript:void(0)" class="btn btn-submit"
+                                                                        data-bs-toggle="modal"
                                                                         data-bs-target="#quick-view-modal-container"><i
                                                                             class="ion-android-open"></i></a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="single-grid-product__content">
-                                                                <div class="single-grid-product__category-rating">
-                                                                    <span class="category"><a
-                                                                            href="shop-left-sidebar.html">{{ $item->category_name }}</a></span>
-                                                                    <span class="rating">
-                                                                        <i class="ion-android-star active"></i>
-                                                                        <i class="ion-android-star active"></i>
-                                                                        <i class="ion-android-star active"></i>
-                                                                        <i class="ion-android-star active"></i>
-                                                                        <i class="ion-android-star-outline"></i>
-                                                                    </span>
-                                                                </div>
-
-                                                                <h3 class="single-grid-product__title"> <a
-                                                                        href="single-product.html">{{ $item->name }}</a>
-                                                                </h3>
-                                                                <p class="single-grid-product__price"><span
-                                                                        class="discounted-price">${{ $item->price * ((100 - $item->discount) / 100) }}</span>
-                                                                    <span
-                                                                        class="main-price discounted">${{ $item->price }}</span>
-                                                                </p>
+                                                                </form>
                                                             </div>
                                                         </div>
+                                                        <div class="single-grid-product__content">
+                                                            <div class="single-grid-product__category-rating">
+                                                                <span class="category"><a
+                                                                        href="shop-left-sidebar.html">{{ $item->category_name }}</a></span>
+                                                                <span class="rating">
+                                                                    <i class="ion-android-star active"></i>
+                                                                    <i class="ion-android-star active"></i>
+                                                                    <i class="ion-android-star active"></i>
+                                                                    <i class="ion-android-star active"></i>
+                                                                    <i class="ion-android-star-outline"></i>
+                                                                </span>
+                                                            </div>
+    
+                                                            <h3 class="single-grid-product__title"> <a
+                                                                    href="{{ route('Detail', $item->id) }}">
+                                                                    @if (strlen($item->name) > 50)
+                                                                        {{ substr($item->name, 0, 50) . '...' }}
+                                                                    @else
+                                                                        {{ $item->name }}
+                                                                    @endif
+                                                                </a></h3>
+                                                            <p class="single-grid-product__price"><span
+                                                                    class="discounted-price">${{ $item->price * ((100 - $item->discount) / 100) }}</span>
+                                                                <span
+                                                                    class="main-price discounted">${{ $item->price }}</span>
+                                                            </p>
+                                                        </div>
                                                     </div>
+                                                </div>
                                                 @endforeach
 
 
@@ -755,7 +768,7 @@
     </div>
     <!--====================  End of page content area  ====================-->
     <!--====================  newsletter area ====================-->
-    <div class="newsletter-area section-space--inner">
+    {{-- <div class="newsletter-area section-space--inner">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 offset-lg-2">
@@ -783,5 +796,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection

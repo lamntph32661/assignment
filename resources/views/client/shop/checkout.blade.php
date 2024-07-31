@@ -197,7 +197,13 @@
                                                     @endphp
                                                     <ul>
                                                         @foreach ($carts as $item)
-                                                            <li>{{ $item->name }} X {{ $item->quantity_cart }}
+                                                            <li>@if (strlen($item->name)>50)
+                                                                {{substr($item->name,0,50).'...'}}
+                                                               
+                                                                @else
+                                                                    {{$item->name}}
+                                                                
+                                                            @endif X {{ $item->quantity_cart }}
                                                                 <span>${{ round($item->price * ((100 - $item->discount) / 100), 2) * $item->quantity_cart }}</span>
                                                             </li>
                                                             @php

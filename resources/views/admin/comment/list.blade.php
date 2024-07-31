@@ -9,7 +9,7 @@
       <div class="col-12">
         <div class="card card-primary">
           <div class="card-header">
-            <h3 class="card-title">Danh sách User</h3>
+            <h3 class="card-title">Danh sách bình luận</h3>
             <div class="card-tools">
             {{-- <form action="" method="post" style="display: flex;">
                   <input type="text" name="kyw" id="" class="form-control float-right" placeholder="Search" style=" margin-right: 10px;">
@@ -41,7 +41,13 @@
                     <tr>
                   <td>{{$item->id}}</td>
                   <td>{{$item->user_name}}</td>
-                  <td>{{$item->product_name}}</td>
+                  <td>@if (strlen($item->product_name)>50)
+                    {{substr($item->product_name,0,50).'...'}}
+                   
+                    @else
+                        {{$item->product_name}}
+                    
+                @endif</td>
                   <td>{{$item->rating}}</td>
                  
                   

@@ -21,7 +21,7 @@
                                     </ul> --}}
                                 </li>
 
-                                <li><a href="#">PAGES</a>
+                                {{-- <li><a href="#">PAGES</a>
                                     <ul class="sub-menu">
                                         <li class="menu-item-has-children"><a href="#">Page List One</a>
                                             <ul class="sub-menu">
@@ -45,7 +45,7 @@
                                             </ul>
                                         </li>
                                     </ul>
-                                </li>
+                                </li> --}}
 
                                 <li class=""><a href="{{ route('List') }}">SHOP</a>
                                     {{-- <ul class="mega-menu four-column">
@@ -98,7 +98,7 @@
                                     </ul> --}}
                                 </li>
 
-                                <li class="menu-item-has-children"><a href="blog-left-sidebar.html">BLOG</a>
+                                {{-- <li class="menu-item-has-children"><a href="blog-left-sidebar.html">BLOG</a>
                                     <ul class="sub-menu">
                                         <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
                                         <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
@@ -111,7 +111,7 @@
                                     </ul>
                                 </li>
 
-                                <li><a href="contact.html">CONTACT</a></li>
+                                <li><a href="contact.html">CONTACT</a></li> --}}
                             </ul>
                         </nav>
                     </div>
@@ -247,6 +247,7 @@
                                                     <li><a href="{{ route('Logout') }}">Logout</a></li>
                                                 @else
                                                     <li><a href="{{ route('Login') }}">Login</a></li>
+                                                    <li><a href="{{ route('Signup') }}">Signup</a></li>
                                                 @endif
 
 

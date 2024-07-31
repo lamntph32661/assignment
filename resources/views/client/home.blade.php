@@ -107,7 +107,7 @@
 
     <!--====================  End of hero slider area  ====================-->
     <!--====================  category area ====================-->
-    <div class="category-area section-space">
+    {{-- <div class="category-area section-space">
         <div class="container wide">
             <div class="row">
                 <div class="col-lg-12">
@@ -227,7 +227,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!--====================  End of category area  ====================-->
     <!--====================  single row slider tab ====================-->
     <div class="single-row-slider-tab-area section-space">
@@ -253,13 +253,13 @@
                         <div class="tab-product-navigation">
                             <div class="nav nav-tabs justify-content-center" id="nav-tab2" role="tablist">
                                 <a class="nav-item nav-link active" id="product-tab-1" data-bs-toggle="tab"
-                                    href="#product-series-1" role="tab" aria-selected="true">Decoration</a>
-                                <a class="nav-item nav-link" id="product-tab-2" data-bs-toggle="tab"
+                                    href="#product-series-1" role="tab" aria-selected="true"></a>
+                                {{-- <a class="nav-item nav-link" id="product-tab-2" data-bs-toggle="tab"
                                     href="#product-series-2" role="tab" aria-selected="false">Lighting</a>
                                 <a class="nav-item nav-link" id="product-tab-3" data-bs-toggle="tab"
                                     href="#product-series-3" role="tab" aria-selected="false">Storage</a>
                                 <a class="nav-item nav-link" id="product-tab-4" data-bs-toggle="tab"
-                                    href="#product-series-4" role="tab" aria-selected="false">Living Room</a>
+                                    href="#product-series-4" role="tab" aria-selected="false">Living Room</a> --}}
                             </div>
                         </div>
 
@@ -293,10 +293,10 @@
                                 {"breakpoint":479, "settings": {"slidesToShow": 1, "arrows": false} }
                             ]'>
 
-                                        
-                                            <!--=======  single grid product  =======-->
 
-                                            @foreach ($products as $item)
+                                        <!--=======  single grid product  =======-->
+
+                                        @foreach ($products as $item)
                                             <div class="col">
                                                 <div class="single-grid-product">
                                                     <div class="single-grid-product__image">
@@ -304,27 +304,33 @@
                                                             <span class="sale">-{{ $item->discount }}%</span>
                                                             <span class="new">New</span>
                                                         </div>
-                                                        <a href="{{route('Detail',$item->id)}}">
+                                                        <a href="{{ route('Detail', $item->id) }}">
                                                             <img style="width: 300px; height: 400px; object-fit:cover"
                                                                 src="{{ asset($item->image) }}" class="img-fluid"
                                                                 alt="" style="object-fit: cover">
                                                             <img style="width: 300px; height: 400px; object-fit:cover"
                                                                 src="{{ asset($item->image) }}" class="img-fluid"
-                                                                alt="" >
+                                                                alt="">
                                                         </a>
 
                                                         <div class="hover-icons">
                                                             <form action="{{ route('addToCart') }}" method="post">
                                                                 @csrf
-                                                                <input type="hidden" name="product_id" value="{{ $item->id }}">
+                                                                <input type="hidden" name="product_id"
+                                                                    value="{{ $item->id }}">
                                                                 <input type="hidden" name="quantity" value="1">
-                                                                 <a href="javascript:void(0)"><button type="submit" class="btn btn-submit"  onclick="return alert('Thêm thành công')"><i class="ion-bag"></button></i></a>
-                                                            <a href="javascript:void(0)" class="btn btn-submit"><i class="ion-heart"></i></a>
-                                                            <a href="javascript:void(0)" class="btn btn-submit"><i
-                                                                    class="ion-android-options"></i></a>
-                                                            <a href="javascript:void(0)" class="btn btn-submit" data-bs-toggle="modal"
-                                                                data-bs-target="#quick-view-modal-container"><i
-                                                                    class="ion-android-open"></i></a>
+                                                                <a href="javascript:void(0)"><button type="submit"
+                                                                        class="btn btn-submit"
+                                                                        onclick="return alert('Thêm thành công')"><i
+                                                                            class="ion-bag"></button></i></a>
+                                                                <a href="javascript:void(0)" class="btn btn-submit"><i
+                                                                        class="ion-heart"></i></a>
+                                                                <a href="javascript:void(0)" class="btn btn-submit"><i
+                                                                        class="ion-android-options"></i></a>
+                                                                <a href="javascript:void(0)" class="btn btn-submit"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#quick-view-modal-container"><i
+                                                                        class="ion-android-open"></i></a>
                                                             </form>
                                                         </div>
                                                     </div>
@@ -342,17 +348,26 @@
                                                         </div>
 
                                                         <h3 class="single-grid-product__title"> <a
-                                                                href="single-product.html">{{ $item->name }}</a></h3>
+                                                                href="{{ route('Detail', $item->id) }}">
+                                                                @if (strlen($item->name) > 50)
+                                                                    {{ substr($item->name, 0, 50) . '...' }}
+                                                                @else
+                                                                    {{ $item->name }}
+                                                                @endif
+                                                            </a></h3>
                                                         <p class="single-grid-product__price"><span
-                                                                class="discounted-price">${{ $item->price*((100-$item->discount)/100) }}</span> <span
-                                                                class="main-price discounted">${{ $item->price }}</span></p>
+                                                                class="discounted-price">${{ $item->price * ((100 - $item->discount) / 100) }}</span>
+                                                            <span
+                                                                class="main-price discounted">${{ $item->price }}</span>
+                                                        </p>
                                                     </div>
-                                                </div></div>
-                                            @endforeach
+                                                </div>
+                                            </div>
+                                        @endforeach
 
 
-                                            <!--=======  End of single grid product  =======-->
-                                        
+                                        <!--=======  End of single grid product  =======-->
+
 
                                         {{-- <div class="col">
                                             <!--=======  single grid product  =======-->
@@ -832,7 +847,7 @@
                                 {"breakpoint":479, "settings": {"slidesToShow": 1, "arrows": false} }
                             ]'>
 
-                                        <div class="col">
+                                        {{-- <div class="col">
                                             <!--=======  single grid product  =======-->
                                             <div class="single-grid-product">
                                                 <div class="single-grid-product__image">
@@ -1329,7 +1344,7 @@
                                                 </div>
                                             </div>
                                             <!--=======  End of single grid product  =======-->
-                                        </div>
+                                        </div> --}}
 
                                     </div>
                                 </div>
@@ -1361,7 +1376,7 @@
                                 {"breakpoint":479, "settings": {"slidesToShow": 1, "arrows": false} }
                             ]'>
 
-                                        <div class="col">
+                                        {{-- <div class="col">
                                             <!--=======  single grid product  =======-->
                                             <div class="single-grid-product">
                                                 <div class="single-grid-product__image">
@@ -1858,7 +1873,7 @@
                                                 </div>
                                             </div>
                                             <!--=======  End of single grid product  =======-->
-                                        </div>
+                                        </div> --}}
 
                                     </div>
                                 </div>
@@ -2351,8 +2366,8 @@
                                                             src="assets/img/products/10-600x800.webp" class="img-fluid"
                                                             alt="">
                                                         <img width="600" height="800"
-                                                            src="assets/img/products/10_1-600x800.webp"
-                                                            class="img-fluid" alt="">
+                                                            src="assets/img/products/10_1-600x800.webp" class="img-fluid"
+                                                            alt="">
                                                     </a>
 
                                                     <div class="hover-icons">
@@ -2404,7 +2419,7 @@
     </div>
     <!--====================  End of single row slider tab  ====================-->
     <!--====================  testimonial area ====================-->
-    <div class="testimonial-area section-space">
+    {{-- <div class="testimonial-area section-space">
         <div class="container wide">
             <div class="row">
                 <div class="col-lg-12">
@@ -3132,5 +3147,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection

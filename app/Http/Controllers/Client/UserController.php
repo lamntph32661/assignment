@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Client;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserLoginRequest;
+use App\Http\Requests\UserSignupRequest;
 use App\Models\CustomerResetToken;
 use App\Models\Order;
 use App\Models\User;
@@ -21,7 +23,7 @@ class UserController extends Controller
         $orders = Order::where('user_id', Auth::user()->id)->where('status', '<>', 'Delivered')->where('status', '<>', 'Cancelled')->orderBy('id', 'desc')->get();
         $orderHistory = Order::where('user_id', Auth::user()->id)->where('status', '=', 'Delivered')->orwhere('status', '=', 'Cancelled')->orderBy('id', 'desc')->get();
         $info = User::find(Auth::user()->id);
-        return view('client/account/my-account', compact('orders', 'info', 'orderHistory'))->with(['active3'=>'class="active"','show3'=>'show']);
+        return view('client/account/my-account', compact('orders', 'info', 'orderHistory'))->with(['active3' => 'class="active"', 'show3' => 'show']);
     }
     public function changeInfo($id, Request $req)
     {
@@ -85,39 +87,51 @@ class UserController extends Controller
     {
         return view('client/login/signup');
     }
-    public function checkUserSignup(Request $req)
+    public function checkUserSignup(UserSignupRequest $req)
     {
         // $user = User::where('email', 'like', $req->email)->first();
-        $req->validate([
-            'name' => 'required',
-            'email' => 'required|unique:users',
-            'password' => 'required',
-            'confirmpassword'=>'required|same:password'
-        ],[
-            'name.required'=>'Vui lòng điền vào trường này',
-            'email.required'=>'Vui lòng điền vào trường này',
-            'password.required'=>'Vui lòng điền vào trường này',
-            'confirmpassword.required'=>'Vui lòng điền vào trường này',
-            'email.unique'=>'Email đã được sử dụng, vui lòng dùng email khác',
-            'confirmpassword.same'=>'Password xác nhận không khớp',
-        ]);
+        // $req->validate([
+        //     'name' => 'required',
+        //     'email' => 'required|unique:users',
+        //     'password' => 'required',
+        //     'confirmpassword' => 'required|same:password'
+        // ], [
+        //     'name.required' => 'Vui lòng điền vào trường này',
+        //     'email.required' => 'Vui lòng điền vào trường này',
+        //     'password.required' => 'Vui lòng điền vào trường này',
+        //     'confirmpassword.required' => 'Vui lòng điền vào trường này',
+        //     'email.unique' => 'Email đã được sử dụng, vui lòng dùng email khác',
+        //     'confirmpassword.same' => 'Password xác nhận không khớp',
+        // ]);
         // if (empty($user) && Hash::check($req->password, $user->password)) {
-            $data = [
-                'name' => $req->name,
-                'email' => $req->email,
-                'password' => Hash::make($req->password),
-                'email_verified_at' => null,
-                'remember_token' => $req->name,
-                'created_at' => Carbon::now(),
-                'updated_at' => null,
-            ];
-            User::insert($data);
-            $message = "Đăng ký thành công, vui lòng đăng nhập!";
-            return redirect()->back()->with(['message' => $message]);
+        $data = [
+            'name' => $req->name,
+            'email' => $req->email,
+            'password' => $req->password,
+        ];
+        Mail::send('client/email/active-account', compact('data'), function ($email) use ($data) {
+            $email->to($data['email']);
+            $email->subject('Xác nhận đăng ký tài khoản!');
+        });
+        // User::insert($data);
+        $message = "Vui lòng kiểm tra email để kích hoạt tài khoản";
+        return redirect()->back()->with(['message' => $message]);
         // } else {
         //     $message = "Email đã được sử dụng, vui lòng chọn email khác";
         //     return view('client/login/login')->with(['message' => $message]);
         // }
+    }
+    public function Active(Request $req)
+    {
+        $data = [
+            'name' => $req->name,
+            'email' => $req->email,
+            'password' => Hash::make($req->password),
+            'email_verified_at' => Carbon::now(),
+        ];
+        User::insert($data);
+        $message = "Đăng ký thành công, vui lòng đăng nhập!";
+        return redirect()->route('Login')->with(['message' => $message]);
     }
     public function logout()
     {
@@ -125,33 +139,39 @@ class UserController extends Controller
         // dd(Session::get('user'));
         return redirect()->route('home');
     }
-    function checkUserLogin(Request $req)
+    function checkUserLogin(UserLoginRequest $req)
     {
-        
-        $req->validate(
-            [
-                'login_email' => 'required|email',
-            'login_password' => 'required',
-            ],[
-                'login_name.required'=>'Vui lòng điền vào trường này',
-            'login_email.required'=>'Vui lòng điền vào trường này',
-            'login_email.email'=>'Vui lòng điền đúng định dạng email',
-            ]
-        );
-        $user = User::where('email', 'like', $req->login_email)
-        // ->where('password', 'like', Hash::make($req->login_password) )
-        ->first();
-        // dd($user,Hash::check($req->login_password,$user->password));
-        if ($user&&Hash::check($req->login_password,$user->password)) {
-            $data=[
-'email' => $req->login_email,
-            'password' => $req->login_password
+
+        // $req->validate(
+        //     [
+        //         'login_email' => 'required|email',
+        //         'login_password' => 'required',
+        //     ],
+        //     [
+        //         'login_name.required' => 'Vui lòng điền vào trường này',
+        //         'login_email.required' => 'Vui lòng điền vào trường này',
+        //         'login_email.email' => 'Vui lòng điền đúng định dạng email',
+        //     ]
+        // );
+
+        // $user = User::where('email', 'like', $req->login_email)
+        //     // ->where('password', 'like', Hash::make($req->login_password) )
+        //     ->first();
+        // // dd($user,Hash::check($req->login_password,$user->password));
+        $data = [
+                'email' => $req->login_email,
+                'password' => $req->login_password
             ];
-            Auth::attempt($data, $req->remember);
+        if (
+            // $user && Hash::check($req->login_password, $user->password )
+Auth::attempt($data, $req->remember)
+           ) {
+            
+            
 
             return redirect()->route('home');
         } else {
-            $message = "Email hoặc mật khẩu không chính xác!";
+            $message = "Sai mật khẩu";
             return redirect()->back()->with(['message' => $message]);
         }
     }
@@ -162,8 +182,10 @@ class UserController extends Controller
     function checkForGot(Request $req)
     {
         $user = User::where('email', 'like', $req->email)->first();
+        if ($checkIssetToken = CustomerResetToken::where('email', $req->email)) {
+            $checkIssetToken->delete();
+        }
         if (!empty($user)) {
-
             // return view('client/home');
             $customer = User::where('email', $req->email)->first();
             $token = Str::random(50);
@@ -177,6 +199,7 @@ class UserController extends Controller
                 // Mail::send(new ForgotPassword($customer, $token))->to($req->email);
                 Mail::send('client.email.forgot-password', compact('customer', 'token'), function ($email) use ($customer) {
                     $email->to($customer->email, 'test phát');
+                    $email->subject('Reset Password');
                 });
                 return view('client/login/forgot-password')->with(['message' => $message]);
             }
@@ -194,6 +217,10 @@ class UserController extends Controller
     }
     function change_password($token, Request $req)
     {
+        $req->validate([
+            'password' => 'required',
+            'confirmpassword' => 'required|same:password',
+        ]);
         $tokenData = CustomerResetToken::where('token', $token)->firstOrFail();
         $customer = User::where('email', $tokenData->email)->firstOrFail();
         $data = ['password' => Hash::make($req->password)];

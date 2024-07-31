@@ -3,7 +3,7 @@
     <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="margin-left: 1px; ">
         <div class="card card-primary w-100" style="min-height: 585px;">
             <div class="card-header">
-                <h3 class="card-title">Thêm danh mục</h3>
+                <h3 class="card-title">Chi tiết đơn hàng</h3>
             </div>
             <table class="table">
                 <thead>

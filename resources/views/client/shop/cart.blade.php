@@ -61,7 +61,13 @@
                                                                 height="800" src="{{ asset($item->image) }}"
                                                                 class="img-fluid" alt="Product"></a></td>
                                                     <td class="pro-title"><a
-                                                            href="{{ route('Detail', $item->id) }}">{{ $item->name }}</a>
+                                                            href="{{ route('Detail', $item->id) }}">@if (strlen($item->name)>30)
+                                                            {{substr($item->name,0,30).'...'}}
+                                                           
+                                                            @else
+                                                                {{$item->name}}
+                                                            
+                                                        @endif</a>
                                                     </td>
                                                     <td class="pro-price">
                                                         <span>${{ round($item->price * ((100 - $item->discount) / 100), 2) }}</span>
@@ -90,7 +96,7 @@
                                                     </td>
                                                 </tr>
                                                 @php
-                                                    $total += $item->price * $item->quantity_cart;
+                                                    $total += round($item->price * ((100 - $item->discount) / 100), 2) * $item->quantity_cart;
                                                 @endphp
                                             @endforeach
 
@@ -115,7 +121,7 @@
 
                                     <!--=======  Discount Coupon  =======-->
 
-                                    <div class="discount-coupon">
+                                    {{-- <div class="discount-coupon">
                                         <h4>Discount Coupon Code</h4>
                                         <form action="#">
                                             <div class="row">
@@ -127,7 +133,7 @@
                                                 </div>
                                             </div>
                                         </form>
-                                    </div>
+                                    </div> --}}
 
                                     <!--=======  End of Discount Coupon  =======-->
 

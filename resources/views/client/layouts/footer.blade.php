@@ -8,7 +8,7 @@
                             <div class="row align-items-center no-gutters">
                                 <div class="col-lg-2 col-md-2">
                                     <div class="footer-logo">
-                                        <a href="#"><img width="93" height="25" src="assets/img/logo.webp" class="img-fluid" alt=""></a>
+                                        <a href="#"><img width="93" height="25" src="{{asset('assets/img/logo.webp')}}" class="img-fluid" alt=""></a>
                                     </div>
                                 </div>
 

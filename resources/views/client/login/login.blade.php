@@ -9,10 +9,10 @@
                 <div class="breadcrumb-wrapper breadcrumb-bg">
                     <!--=======  breadcrumb content  =======-->
                     <div class="breadcrumb-content">
-                        <h2 class="breadcrumb-content__title">Login - Register</h2>
+                        <h2 class="breadcrumb-content__title">Login </h2>
                         <ul class="breadcrumb-content__page-map">
                             <li><a href="index.html">Home</a></li>
-                            <li class="active">Login - Register</li>
+                            <li class="active">Login </li>
                         </ul>
                     </div>
                     <!--=======  End of breadcrumb content  =======-->
@@ -37,12 +37,12 @@
                         
                         <div class="row">
                             
-                            <div class="col-sm-12 col-md-12 col-xs-12 col-lg-6">
+                            <div class="col-sm-12 col-md-12 col-xs-12 col-lg-6" style="margin: auto;">
                                 <!-- Login Form s-->
-                                <form action="{{route('Login')}}" method="POST">
+                                <form action="{{route('Login')}}" method="POST" >
                                     @csrf
                                     <div class="login-form">
-                                        <h4 class="login-title">Login</h4>
+                                        <h4 class="login-title" style="text-align: center">Login</h4>
 
                                         <div class="row">
                                             <div class="col-md-12 col-12">
@@ -75,13 +75,14 @@
 
                                 </form>
                             </div>
-                            <div class="col-sm-12 col-md-12 col-lg-6 col-xs-12">
+                            {{-- <div class="col-sm-12 col-md-12 col-lg-6 col-xs-12">
+                                <h3 style="margin: auto">LogIn</h3>
                                 <form method="POST" action="{{route('Signup')}}">
 
                                     <div class="login-form">
                                         @csrf
                                         <h4 class="login-title">Register</h4>
-                                        {{-- {{$message??''}} --}}
+                                        
                                         <div class="row">
                                             <div class="col-md-6 col-12 mb-20">
                                                 <label>Name</label><p style="color: red">{{$errors->first('name')}}</p>
@@ -107,7 +108,7 @@
                                     </div>
 
                                 </form>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>

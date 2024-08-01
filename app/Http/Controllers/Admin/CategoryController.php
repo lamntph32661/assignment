@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Category\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -12,15 +13,15 @@ class CategoryController extends Controller
     {
         return view('admin/category/add');
     }
-    public function addCate(Request $req)
+    public function addCate(CategoryRequest $req)
     {
-        $message=[
-            'name.required'=>'Bạn chưa nhập vào trường này',
-            'name.max'=>'Độ dài tối đa lầ 255 ký tự',
-        ];
-        $req->validate([
-            'name' => 'required|string|max:255'
-        ],$message);
+        // $message=[
+        //     'name.required'=>'Bạn chưa nhập vào trường này',
+        //     'name.max'=>'Độ dài tối đa lầ 255 ký tự',
+        // ];
+        // $req->validate([
+        //     'name' => 'required|string|max:255'
+        // ],$message);
         $data = $req->all('name');
         Category::create($data);
         return redirect()->route('admin.Category.listCategory')->with(['message' => 'Thêm thành công']);
@@ -31,14 +32,14 @@ class CategoryController extends Controller
 
         return view('admin/category/update',compact('category'));
     }
-    public function updateCategoryPost($id, Request $req)  {
-        $message=[
-            'name.required'=>'Bạn chưa nhập vào trường này',
-            'name.max'=>'Độ dài tối đa lầ 255 ký tự',
-        ];
-        $req->validate([
-            'name' => 'required|string|max:255'
-        ],$message);
+    public function updateCategoryPost($id, CategoryRequest $req)  {
+        // $message=[
+        //     'name.required'=>'Bạn chưa nhập vào trường này',
+        //     'name.max'=>'Độ dài tối đa lầ 255 ký tự',
+        // ];
+        // $req->validate([
+        //     'name' => 'required|string|max:255'
+        // ],$message);
         $data = $req->all('name');
         Category::where('id',$id)->update($data);
         return redirect()->route('admin.Category.listCategory')->with(['message' => 'Cập nhật thành công']);

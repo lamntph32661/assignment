@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Cart\AddToCartRequest;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Order_detail;
@@ -35,17 +36,17 @@ class CartController extends Controller
     public function updateToCart(Request $req)
     {
         $req->validate([
-            'quantity'=>'required'
+            'quantity' => 'required'
         ]);
         // $cart = Cart::join('users', 'users.id', '=', 'carts.user_id')
         //     ->where('product_id', $req->product_id)->where('users.id', Auth::user()->id)->first();
 
-        
-            Cart::join('users', 'users.id', '=', 'carts.user_id')
-                ->join('products', 'products.id', '=', 'carts.product_id')
-                ->where('users.id', Auth::user()->id)->where('product_id', $req->product_id)
-                ->update(['carts.quantity' =>  $req->quantity]);
-        
+
+        Cart::join('users', 'users.id', '=', 'carts.user_id')
+            ->join('products', 'products.id', '=', 'carts.product_id')
+            ->where('users.id', Auth::user()->id)->where('product_id', $req->product_id)
+            ->update(['carts.quantity' =>  $req->quantity]);
+
 
         return redirect()->back()->with(['message' => 'Sửa số lượng thành công']);
     }
@@ -74,23 +75,21 @@ class CartController extends Controller
             ->join('products', 'products.id', '=', 'carts.product_id')
             ->select('products.*', 'carts.quantity as quantity_cart', 'carts.id as cart_id')
             ->where('users.id', Auth::user()->id)->orderBy('carts.id', 'desc')->get();
-            if (isset($carts->first()->id)) {
-                return view('client/shop/checkout', compact('carts'));
-            }else {
-                return redirect()->back()->with(['message'=>'Giỏ hàng trống']);
-            }
-        
-        
+        if (isset($carts->first()->id)) {
+            return view('client/shop/checkout', compact('carts'));
+        } else {
+            return redirect()->back()->with(['message' => 'Giỏ hàng trống']);
+        }
     }
-    public function checkOutPost(Request $req)
+    public function checkOutPost(AddToCartRequest $req)
     {
-        $req->validate([
+        // $req->validate([
 
-            'name_user' => 'required|max:255',
-            'address' => 'required|max:255',
-'email' => 'required|max:255',
-            'phone' => 'required|max:10'
-        ],);
+        //     'name_user' => 'required|max:255',
+        //     'address' => 'required|max:255',
+        //     'email' => 'required|max:255',
+        //     'phone' => 'required|max:10'
+        // ],);
         $data = [
             'user_id' => Auth::user()->id,
             'name_user' => $req->name_user,
@@ -224,7 +223,7 @@ class CartController extends Controller
         $data['pay'] = 'paid';
         $data['status'] = 'Processing';
         //    dd($data);
-        if ($result != null&&$result=='00') {
+        if ($result != null && $result == '00') {
 
 
             $carts = Cart::join('users', 'users.id', '=', 'carts.user_id')
@@ -245,7 +244,7 @@ class CartController extends Controller
                 Cart::where('id', $key->cart_id)->delete();
                 return redirect()->route('MyAccount')->with(['message' => 'Đặt hàng thành công', 'active1' => 'class="active"', 'show1' => 'show active']);
             }
-        }else{
+        } else {
             return redirect()->route('CheckOut');
         }
     }

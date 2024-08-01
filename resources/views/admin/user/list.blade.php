@@ -32,8 +32,8 @@
                   <th>Email</th>
                   <th>Phone</th>
                   <th>Address</th>
-                  <th>Created_at</th>
                   <th>Role</th>
+                  <th>Created_at</th>
                   <th>Chức năng</th>
                 </tr>
               </thead>

@@ -32,29 +32,29 @@
                         <div class="page-content-wrapper">
                             <div class="row">
                                 @if (Session::get('message'))
-                    <div class="alert alert-success" role="alert">
+                                    <div class="alert alert-success" role="alert">
 
-                        {{ Session::get('message') ?? '' }}</div>
-                @endif
+                                        {{ Session::get('message') ?? '' }}</div>
+                                @endif
                                 <!-- My Account Tab Menu Start -->
                                 <div class="col-lg-3 col-12">
                                     <div class="myaccount-tab-menu nav" role="tablist">
-                                        <a href="#dashboad"  data-bs-toggle="tab"><i
-                                                class="fa fa-dashboard"></i>
+                                        <a href="#dashboad" data-bs-toggle="tab"><i class="fa fa-dashboard"></i>
                                             Dashboard</a>
 
-                                        <a href="#orders"  data-bs-toggle="tab"><i class="fa fa-cart-arrow-down"></i>
+                                        <a href="#orders" data-bs-toggle="tab"><i class="fa fa-cart-arrow-down"></i>
                                             Orders</a>
 
-                                        
 
-                                        <a href="#orders_history"  data-bs-toggle="tab"><i class="fa fa-cart-arrow-down"></i>
+
+                                        <a href="#orders_history" data-bs-toggle="tab"><i class="fa fa-cart-arrow-down"></i>
                                             Orders History</a>
 
-                                        <a href="#account-info"  data-bs-toggle="tab"><i class="fa fa-user"></i> Account
+                                        <a href="#account-info" {{ session('active4') }} data-bs-toggle="tab"><i
+                                                class="fa fa-user"></i> Account
                                             Details</a>
 
-                                        
+
                                     </div>
                                 </div>
                                 <!-- My Account Tab Menu End -->
@@ -83,7 +83,8 @@
                                         <!-- Single Tab Content End -->
 
                                         <!-- Single Tab Content Start -->
-                                        <div class="tab-pane fade {{Session::get('show1')??''}}" id="orders" role="tabpanel">
+                                        <div class="tab-pane fade {{ Session::get('show1') ?? '' }}" id="orders"
+                                            role="tabpanel">
                                             <div class="myaccount-content">
                                                 <h3>Orders</h3>
 
@@ -108,15 +109,20 @@
                                                                     <td>{{ $item->created_at }}</td>
                                                                     <td>{{ $item->status }}</td>
                                                                     <td>${{ $item->total }}</td>
-                                                                    <td><a href="{{route('DetailOrder',$item->id)}}" class="btn">View</a>
-                                                                        @if ($item->status=='Pending')
-                                                                        <a href="{{route('CancelledOrder',$item->id)}}" onclick="return confirm('Bạn có muốn hủy đơn hàng này?')" class="btn">Cancelled</a></td>
-                                                                        @endif
-                                                                        @if ($item->status=='Shipped')
-                                                                        <a href="{{route('ReceivedOrder',$item->id)}}" class="btn">Received</a></td>
-                                                                        @endif
-                                                                        </td>
-                                                                </tr>
+                                                                    <td><a href="{{ route('DetailOrder', $item->id) }}"
+                                                                            class="btn">View</a>
+                                                                        @if ($item->status == 'Pending')
+                                                                            <a href="{{ route('CancelledOrder', $item->id) }}"
+                                                                                onclick="return confirm('Bạn có muốn hủy đơn hàng này?')"
+                                                                                class="btn">Cancelled</a>
+                                                                    </td>
+                                                            @endif
+                                                            @if ($item->status == 'Shipped')
+                                                                <a href="{{ route('ReceivedOrder', $item->id) }}"
+                                                                    class="btn">Received</a></td>
+                                                            @endif
+                                                            </td>
+                                                            </tr>
                                                             @endforeach
 
 
@@ -126,7 +132,8 @@
                                             </div>
                                         </div>
                                         <!-- Single Tab Content End -->
-                                        <div class="tab-pane fade {{Session::get('show2')??''}}" id="orders_history" role="tabpanel">
+                                        <div class="tab-pane fade {{ Session::get('show2') ?? '' }}" id="orders_history"
+                                            role="tabpanel">
                                             <div class="myaccount-content">
                                                 <h3>Orders History</h3>
 
@@ -151,15 +158,20 @@
                                                                     <td>{{ $item->created_at }}</td>
                                                                     <td>{{ $item->status }}</td>
                                                                     <td>${{ $item->total }}</td>
-                                                                    <td><a href="{{route('DetailOrder',$item->id)}}" class="btn">View</a>
-                                                                        @if ($item->status=='Pending')
-                                                                        <a href="{{route('CancelledOrder',$item->id)}}" onclick="return confirm('Bạn có muốn hủy đơn hàng này?')" class="btn">Cancelled</a></td>
-                                                                        @endif
-                                                                        @if ($item->status=='Shipped')
-                                                                        <a href="{{route('ReceivedOrder',$item->id)}}" class="btn">Received</a></td>
-                                                                        @endif
-                                                                        </td>
-                                                                </tr>
+                                                                    <td><a href="{{ route('DetailOrder', $item->id) }}"
+                                                                            class="btn">View</a>
+                                                                        @if ($item->status == 'Pending')
+                                                                            <a href="{{ route('CancelledOrder', $item->id) }}"
+                                                                                onclick="return confirm('Bạn có muốn hủy đơn hàng này?')"
+                                                                                class="btn">Cancelled</a>
+                                                                    </td>
+                                                            @endif
+                                                            @if ($item->status == 'Shipped')
+                                                                <a href="{{ route('ReceivedOrder', $item->id) }}"
+                                                                    class="btn">Received</a></td>
+                                                            @endif
+                                                            </td>
+                                                            </tr>
                                                             @endforeach
 
 
@@ -169,65 +181,70 @@
                                             </div>
                                         </div>
                                         <!-- Single Tab Content Start -->
-                                        
+
                                         <!-- Single Tab Content End -->
 
                                         <!-- Single Tab Content Start -->
-                                        
+
                                         <!-- Single Tab Content End -->
 
                                         <!-- Single Tab Content Start -->
-                                        
+
                                         <!-- Single Tab Content End -->
 
                                         <!-- Single Tab Content Start -->
-                                        <div class="tab-pane fade  {{Session::get('show3')??''}}" id="account-info" role="tabpanel">
+                                        <div class="tab-pane fade  {{ session('show4') ?? '' }}" id="account-info"
+                                            role="tabpanel">
                                             <div class="myaccount-content">
                                                 <h3>Account Details</h3>
-                                                {{ Session::get('message') }}
+                                                {{-- {{ Session::get('message') }} --}}
                                                 <div class="account-details-form">
                                                     <form action="{{ route('ChangeInfo', $info->id) }}" method="POST">
                                                         @csrf
                                                         <div class="row">
                                                             <div class="col-lg-6 col-12">{{ $errors->first('name') }}
                                                                 <input id="first-name" name="name"
-                                                                    value="{{ $info->name }}"
-                                                                    placeholder="Name" type="text">    
+                                                                    value="{{ $info->name }}" placeholder="Name"
+                                                                    type="text">
                                                             </div>
 
                                                             <div class="col-lg-6 col-12">{{ $errors->first('email') }}
-                                                                <input id="last-name" placeholder="Email" name="email"
-                                                                    value="{{ $info->email }}" type="email">
+                                                                <input id="last-name" disabled placeholder="Email"
+                                                                    name="email" value="{{ $info->email }}"
+                                                                    type="email">
                                                             </div>
 
                                                             <div class="col-12">{{ $errors->first('phone') }}
-                                                                <input id="display-name" placeholder="Phone"
-                                                                    name="phone" value="{{ $info->phone }}"
-                                                                    type="text">
+                                                                <input id="display-name" placeholder="Phone" name="phone"
+                                                                    value="{{ $info->phone }}" type="text">
                                                             </div>
 
                                                             <div class="col-12">{{ $errors->first('address') }}
                                                                 <input id="email" placeholder="Address"
                                                                     name="address" value="{{ $info->address }}"
                                                                     type="text">
-                                                            </div><input type="hidden" name="passwordHidden"
-                                                                value="{{ $info->password }}">
-
-                                                            <div class="col-12 mb-2">
-                                                                <h4>Password change</h4>
                                                             </div>
-
+                                                            {{-- <input type="hidden" name="passwordHidden" value="{{ $info->password }}"> --}}
+                                                                <input type="hidden" name="email" value="{{ $info->email }}">
                                                             <div class="col-12">{{ $errors->first('password') }}
                                                                 <input id="current-pwd" placeholder="Current Password"
                                                                     name="password" type="password" required>
                                                             </div>
-
-                                                            <div class="col-lg-6 col-12">{{ $errors->first('new_password') }}
-                                                                <input id="new-pwd" placeholder="New Password"
-                                                                    name="new_password" type="password">
+                                                            <div class="col-12 mb-2">
+                                                                <h4>Password change</h4>
                                                             </div>
 
-                                                            <div class="col-lg-6 col-12">{{ $errors->first('confirm_new_password') }}
+
+
+                                                            <div class="col-lg-6 col-12">
+
+                                                                <input id="new-pwd" placeholder="New Password"
+                                                                    name="new_password"
+                                                                    type="password">{{ $errors->first('new_password') }}
+                                                            </div>
+
+                                                            <div class="col-lg-6 col-12">
+                                                                {{ $errors->first('confirm_new_password') }}
                                                                 <input id="confirm-pwd" placeholder="Confirm Password"
                                                                     name="confirm_new_password" type="password">
                                                             </div>

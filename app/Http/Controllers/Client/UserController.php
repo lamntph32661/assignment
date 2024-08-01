@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserSignupRequest;
 use App\Models\CustomerResetToken;
@@ -25,33 +26,11 @@ class UserController extends Controller
         $info = User::find(Auth::user()->id);
         return view('client/account/my-account', compact('orders', 'info', 'orderHistory'))->with(['active3' => 'class="active"', 'show3' => 'show']);
     }
-    public function changeInfo($id, Request $req)
+    public function changeInfo($id, UpdateUserRequest $req)
     {
         $user = User::find($id);
-        if (Hash::check($req->password, $req->passwordHidden)) {
-            $req->validate(
-                [
-                    'name' => 'required|max:255',
-                    'email' => 'required|max:255',
-                    'phone' => 'required|max:10',
-                    'address' => 'required|max:255',
-                    'new_password' => 'max:255',
-                    'confirm_new_password' => 'max:255|same:new_password'
-                ],
-                $err = [
-                    'name.required' => 'Vui lòng nhập tên',
-                    'name.max' => 'độ dài tối đa: 255 ký tự',
-                    'email.required' => 'Vui lòng nhập email',
-                    'email.max' => 'độ dài tối đa: 255 ký tự',
-                    'phone.required' => 'Vui lòng nhập tên',
-                    'address.required' => 'Vui lòng nhập tên',
-                    'address.max' => 'độ dài tối đa: 255 ký tự',
-                    'phone.max' => 'độ dài tối đa: 10 ký tự',
-                    'new_password.max' => 'độ dài tối đa: 255 ký tự',
-                    'confirm_new_password.same' => 'Mật khẩu không khớp',
-                    'confirm_new_password.max' => 'độ dài tối đa: 255 ký tự',
-                ]
-            );
+        if (Hash::check($req->password, $user->password)) {
+            
             $data = $req->all('name', 'email', 'phone', 'address');
             if ($req->confirm_new_password != null && $req->new_password != null) {
                 $data['password'] = Hash::make($req->confirm_new_password);
@@ -61,7 +40,7 @@ class UserController extends Controller
         } else {
             $message = 'Sai mật khẩu';
         }
-        return redirect()->back()->with(['message' => $message]);
+        return redirect()->back()->with(['message' => $message,'active4'=>'class="active"','show4'=>'show active']);
     }
     public function add()
     {
